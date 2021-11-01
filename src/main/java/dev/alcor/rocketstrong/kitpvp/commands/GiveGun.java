@@ -92,7 +92,8 @@ public class GiveGun implements CommandExecutor {
 
                     nbti = new NBTItem(Gun);
                     nbti.setString("Gun", "RocketLauncher");
-
+                    nbti.setInteger("CustomModelData", 4);
+                    nbti.setBoolean("Charged", true);
                     break;
                 default:
                     sender.sendMessage("That's Not A Gun");

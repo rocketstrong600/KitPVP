@@ -1,7 +1,8 @@
 package dev.alcor.rocketstrong.kitpvp.commands;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
@@ -9,8 +10,10 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.StringUtil;
 
 import dev.alcor.rocketstrong.kitpvp.App;
+import dev.alcor.rocketstrong.kitpvp.Khandler.KCommand;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.World;
@@ -21,7 +24,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 
 
-public class Fireworks implements CommandExecutor {
+public class Fireworks implements KCommand {
     // Executed when someone does /firework
     private final App plugin;
 
@@ -30,7 +33,16 @@ public class Fireworks implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public String GetCommandWord() {
+        return "fireworkshow";
+    }
+
+    @Override
+    public String GetCommandPerm() {
+        return "kitpvp.fireworks";
+    }
+    @Override
+    public boolean CommandExecuter(CommandSender sender, Command command, String label, String[] args) {
         //Check if Player
         if (sender instanceof Player || sender instanceof BlockCommandSender) {
             sender.sendMessage("Enjoy the show!");
@@ -155,6 +167,26 @@ public class Fireworks implements CommandExecutor {
             sender.sendMessage("You Are Not A Player");
         }
         return true;
+    }
+
+    @Override
+    public List<String> CommandCompleter(CommandSender sender, Command command, String alias, String[] args) {
+        List<String> Options = new ArrayList<>();
+        List<String> Output = new ArrayList<>();
+        if (args.length == 1) {
+            Options.add("red");
+            Options.add("green");
+            Options.add("blue");
+            Options.add("random");
+            Options.add("custom");
+            StringUtil.copyPartialMatches(args[0], Options, Output);
+        }
+        if (args[0].equalsIgnoreCase("custom") && args.length <= 4) {
+
+            Output.add("0");
+        }
+
+        return Output;
     }
 
 }

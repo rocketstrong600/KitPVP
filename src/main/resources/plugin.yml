@@ -1,17 +1,17 @@
 main: dev.alcor.rocketstrong.kitpvp.App
 name: kitpvp
 version: 1.0
-api-version: 1.17.1
+api-version: 1.17
 depend: [NBTAPI, ProtocolLib, ModelEngine]
 commands:
-   fshow:
-      description: Puts on a fireworks show!
-      aliases:
-         - firewk
-         - fw
-      usage: /<command> [colour](red,green,blue,random) *Leaving blank will default to random!*
-      permission: Fireworks.show
    givegun:
       description: Obtain The Unholy Weapon
-      usage: /givegun [GUN]
-      permission: Fireworks.givegun
+      usage: /<command> [GUN]
+      permission: kitpvp.givegun
+   kitpvp:
+      description: Kitpvp Commands
+      aliases:
+         - kp
+         - kpvp
+      usage: /<command>
+      permission: kitpvp.kitpvp
